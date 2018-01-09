@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="previsionMeteo" targetNamespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo">
+    <types>
+        <xsd:schema xmlns:tns="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo" targetNamespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo">
+            <xsd:complexType name="Detail">
+                <xsd:choice>
+                    <xsd:element name="temperature" type="xsd:int"/>
+                    <xsd:element name="resume" type="xsd:string"/>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="meteoDemainRequest">
+        <part name="ville" type="xsd:string"/>
+    </message>
+    <message name="meteoDemainResponse">
+        <part name="reponseSimple" type="xsd:string"/>
+    </message>
+    <message name="previsionMeteoOperationRequest">
+        <part name="ville" type="xsd:string"/>
+    </message>
+    <message name="previsionMeteoOperationResponse">
+        <part name="reponseDetaillee" type="tns:Detail"/>
+    </message>
+    <portType name="previsionMeteoPortType">
+        <operation name="meteoDemain">
+            <input name="input1" message="tns:meteoDemainRequest"/>
+            <output name="output1" message="tns:meteoDemainResponse"/>
+        </operation>
+        <operation name="meteoDetaillee">
+            <input name="input2" message="tns:previsionMeteoOperationRequest"/>
+            <output name="output2" message="tns:previsionMeteoOperationResponse"/>
+        </operation>
+    </portType>
+    <binding name="previsionMeteoBinding" type="tns:previsionMeteoPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="meteoDemain">
+            <soap:operation/>
+            <input name="input1">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo"/>
+            </input>
+            <output name="output1">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo"/>
+            </output>
+        </operation>
+        <operation name="meteoDetaillee">
+            <soap:operation/>
+            <input name="input2">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo"/>
+            </input>
+            <output name="output2">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/PrevisionMeteoWS/java/previsionMeteo"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="previsionMeteoService">
+        <port name="previsionMeteoPort" binding="tns:previsionMeteoBinding">
+            <soap:address location="http://clle-ltc-p83:8080/PrevisionMeteoWS/previsionMeteoService"/>
+        </port>
+    </service>
+</definitions>
